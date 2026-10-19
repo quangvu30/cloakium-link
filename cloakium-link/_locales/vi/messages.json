@@ -1,0 +1,4 @@
+{
+  "extName": { "message": "Cloakium Link" },
+  "extDescription": { "message": "Điều khiển Chrome của bạn từ Cloakium, giao việc cho agent AI bằng API key của bạn và ra lệnh qua bot Telegram." }
+}

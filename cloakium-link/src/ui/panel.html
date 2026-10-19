@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cloakium Link</title>
+    <link rel="stylesheet" href="panel.css" />
+  </head>
+  <body>
+    <header class="app-bar">
+      <div class="brand">
+        <img class="brand-mark" src="../../icons/logo.svg" alt="" width="18" height="18" />
+        <span class="brand-name" data-i18n="app.name">Cloakium Link</span>
+      </div>
+      <button class="page-chip" id="pageChip" type="button" hidden>
+        <span class="page-chip-dot" id="pageChipDot"></span>
+        <span class="page-chip-text" id="pageChipText"></span>
+      </button>
+    </header>
+
+    <!-- Tín hiệu "đang bị điều khiển từ xa": hiện trên mọi tab, kèm nút ngắt ngay tại máy. -->
+    <div class="remote-banner" id="remoteBanner" role="alert" hidden>
+      <span class="remote-banner-dot" aria-hidden="true"></span>
+      <span class="remote-banner-text" id="remoteBannerText"></span>
+      <button class="remote-banner-btn" id="remoteKick" type="button" data-i18n="remote.kick">Disconnect</button>
+    </div>
+
+    <nav class="tabbar" role="tablist" id="tabbar">
+      <button role="tab" id="tab-chat" aria-controls="view-chat" data-view="chat" class="is-active" data-i18n="nav.chat">Chat</button>
+      <button role="tab" id="tab-remote" aria-controls="view-remote" data-view="remote" data-i18n="nav.remote">Remote</button>
+      <button role="tab" id="tab-network" aria-controls="view-network" data-view="network" hidden><span data-i18n="nav.network">Network</span><span class="tab-count" id="netCount" hidden></span></button>
+      <button role="tab" id="tab-log" aria-controls="view-log" data-view="log" hidden><span data-i18n="nav.log">Log</span><span class="tab-count" id="logCount" hidden></span></button>
+      <button role="tab" id="tab-settings" aria-controls="view-settings" data-view="settings" data-i18n="nav.settings">Settings</button>
+    </nav>
+
+    <main id="main">
+      <!-- ------------------------------ CHAT ------------------------------ -->
+      <section class="view is-active" id="view-chat" role="tabpanel" aria-labelledby="tab-chat">
+        <div class="thread" id="thread"></div>
+
+        <div class="composer" id="composer">
+          <div class="composer-banner" id="composerBanner" hidden></div>
+
+          <div class="composer-box" id="composerBox">
+            <!-- Ô nhập là contenteditable chứ không phải textarea: sau này còn chèn
+                 chip lệnh, nhắc @, thẻ ngữ cảnh… vào giữa dòng đang gõ. -->
+            <div
+              class="composer-input"
+              id="composerInput"
+              contenteditable="true"
+              role="textbox"
+              aria-multiline="true"
+              data-i18n-placeholder="chat.placeholder"
+              spellcheck="false"
+            ></div>
+
+            <div class="composer-actions">
+              <button class="icon-btn" id="historyBtn" type="button" data-i18n-title="chat.history" data-i18n-aria="chat.history" aria-haspopup="menu" aria-expanded="false">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3.2a4.8 4.8 0 1 0 4.62 6.1" /><path d="M8 5.2V8l2 1.2" /><path d="M8 3.2 6.4 1.6M8 3.2 6.4 4.8" /></svg>
+              </button>
+              <button class="icon-btn" id="pickBtn" type="button" data-i18n-title="chat.pickElement" data-i18n-aria="chat.pickElement">
+                <svg viewBox="0 0 16 16" aria-hidden="true">
+                  <path d="M2 5.4V3a1 1 0 0 1 1-1h2.4" />
+                  <path d="M10.6 2H13a1 1 0 0 1 1 1v2.4" />
+                  <path d="M2 10.6V13a1 1 0 0 0 1 1h2.4" />
+                  <path d="M7 7l6.4 2.5-2.6 1-1 2.6z" fill="currentColor" stroke="none" />
+                </svg>
+              </button>
+              <button class="icon-btn" id="newChatBtn" type="button" data-i18n-title="chat.newChat" data-i18n-aria="chat.newChat">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3.5v9M3.5 8h9" /></svg>
+              </button>
+              <span class="spacer"></span>
+              <button class="send-btn" id="sendBtn" type="button" data-i18n-aria="chat.send" disabled>
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h10M8.6 3.8 12.8 8l-4.2 4.2" /></svg>
+              </button>
+              <button class="send-btn is-stop" id="stopBtn" type="button" data-i18n-aria="chat.stop" hidden>
+                <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="5" y="5" width="6" height="6" rx="1.2" fill="currentColor" stroke="none" /></svg>
+              </button>
+            </div>
+          </div>
+          <p class="composer-hint" id="composerHint" data-i18n="chat.sendHint">Enter to send · Shift+Enter for a new line</p>
+        </div>
+
+        <div class="popover" id="commandMenu" role="listbox" hidden></div>
+
+        <div class="drawer" id="historyDrawer" hidden>
+          <div class="drawer-head">
+            <span class="drawer-title" data-i18n="chat.history">Chats</span>
+            <button class="link-btn danger" id="historyClear" type="button" data-i18n="chat.clearAll">Delete all</button>
+            <button class="icon-btn" id="historyClose" type="button" data-i18n-title="common.close" data-i18n-aria="common.close">
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.6 4.6 11.4 11.4M11.4 4.6 4.6 11.4" /></svg>
+            </button>
+          </div>
+          <div class="drawer-list" id="historyList"></div>
+        </div>
+      </section>
+
+      <!-- ------------------------------ TỪ XA ------------------------------ -->
+      <section class="view" id="view-remote" role="tabpanel" aria-labelledby="tab-remote" hidden>
+        <div class="settings" id="remoteRoot"></div>
+      </section>
+
+      <!-- ---------------------------- SETTINGS ---------------------------- -->
+      <section class="view" id="view-network" role="tabpanel" aria-labelledby="tab-network" hidden>
+        <div class="capture-bar">
+          <input type="search" id="netFilter" data-i18n-placeholder="capture.filter" placeholder="Filter…" />
+          <label class="capture-check"><input type="checkbox" id="netErrorsOnly" /><span data-i18n="capture.errorsOnly">Errors only</span></label>
+          <span class="capture-tally" id="netTally"></span>
+          <button type="button" class="secondary-btn" id="netClear" data-i18n="capture.clear">Clear</button>
+        </div>
+        <div class="capture-list" id="netList"></div>
+      </section>
+
+      <section class="view" id="view-log" role="tabpanel" aria-labelledby="tab-log" hidden>
+        <div class="capture-bar">
+          <input type="search" id="logFilter" data-i18n-placeholder="capture.filter" placeholder="Filter…" />
+          <label class="capture-check"><input type="checkbox" id="logErrorsOnly" /><span data-i18n="capture.errorsOnly">Errors only</span></label>
+          <span class="capture-tally" id="logTally"></span>
+          <button type="button" class="secondary-btn" id="logClear" data-i18n="capture.clear">Clear</button>
+        </div>
+        <div class="capture-list" id="logList"></div>
+      </section>
+
+      <section class="view" id="view-settings" role="tabpanel" aria-labelledby="tab-settings" hidden>
+        <div class="settings" id="settingsRoot"></div>
+      </section>
+    </main>
+
+    <!-- Hộp thoại xin phép tải model về máy. Dùng <dialog> để có sẵn bẫy focus và Esc. -->
+    <dialog class="modal" id="modelDialog">
+      <h2 class="modal-title" id="modelTitle"></h2>
+      <p class="modal-body" id="modelBody"></p>
+      <ul class="req-list" id="modelReqs"></ul>
+      <div class="progress" id="modelProgress" hidden>
+        <div class="progress-track"><span class="progress-fill" id="modelBar"></span></div>
+        <span class="progress-pct" id="modelPct">0%</span>
+      </div>
+      <p class="modal-note" id="modelNote" hidden></p>
+      <div class="modal-actions">
+        <button class="secondary-btn" id="modelCancel" type="button"></button>
+        <button class="primary-btn" id="modelConfirm" type="button"></button>
+      </div>
+    </dialog>
+
+    <script type="module" src="panel.js"></script>
+  </body>
+</html>
