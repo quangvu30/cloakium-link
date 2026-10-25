@@ -22,7 +22,6 @@ Cập nhật: tải zip mới, giải nén đè lên thư mục cũ (hoặc `git
 - API key LLM, bot token Telegram và mật khẩu truy cập chỉ lưu trong Chrome của bạn (`chrome.storage.local`), không gửi lên Cloakium. Mật khẩu lưu dạng băm Argon2id.
 - Hình ảnh và thao tác đi thẳng giữa hai trình duyệt (WebRTC); Cloakium chỉ chuyển tin nhắn bắt tay.
 - Khi đang bị điều khiển: biểu tượng extension hiện **LIVE** màu đỏ, có thông báo hệ thống và nút **Ngắt** trong side panel.
-- Xem chi tiết tại [Chính sách bảo mật (Privacy Policy)](PRIVACY_POLICY.md).
 
 ---
 
@@ -50,4 +49,3 @@ Update: download the new zip, unzip it over the old folder (or `git pull`), then
 - LLM API keys, the Telegram bot token and the access password stay in your Chrome (`chrome.storage.local`) and are never sent to Cloakium. The password is stored as an Argon2id hash.
 - Picture and input go straight between the two browsers (WebRTC); Cloakium only relays the handshake.
 - While it is being controlled: a red **LIVE** badge on the extension icon, a system notification and a **Disconnect** button in the side panel.
-- Read our full [Privacy Policy](PRIVACY_POLICY.md).

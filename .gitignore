@@ -1,6 +1,0 @@
-# Store submission artifacts & local helpers
-STORE_SUBMISSION_GUIDE.md
-generate_screenshots.py
-screenshots/
-pack.sh
-cloakium-link-store.zip
