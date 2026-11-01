@@ -27,6 +27,7 @@
 
     <nav class="tabbar" role="tablist" id="tabbar">
       <button role="tab" id="tab-chat" aria-controls="view-chat" data-view="chat" class="is-active" data-i18n="nav.chat">Chat</button>
+      <button role="tab" id="tab-workflows" aria-controls="view-workflows" data-view="workflows" data-i18n="nav.workflows">Workflows</button>
       <button role="tab" id="tab-remote" aria-controls="view-remote" data-view="remote" data-i18n="nav.remote">Remote</button>
       <button role="tab" id="tab-network" aria-controls="view-network" data-view="network" hidden><span data-i18n="nav.network">Network</span><span class="tab-count" id="netCount" hidden></span></button>
       <button role="tab" id="tab-log" aria-controls="view-log" data-view="log" hidden><span data-i18n="nav.log">Log</span><span class="tab-count" id="logCount" hidden></span></button>
@@ -93,6 +94,11 @@
           </div>
           <div class="drawer-list" id="historyList"></div>
         </div>
+      </section>
+
+      <!-- ---------------------------- WORKFLOW ---------------------------- -->
+      <section class="view" id="view-workflows" role="tabpanel" aria-labelledby="tab-workflows" hidden>
+        <div class="settings" id="workflowsRoot"></div>
       </section>
 
       <!-- ------------------------------ TỪ XA ------------------------------ -->

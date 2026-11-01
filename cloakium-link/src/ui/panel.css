@@ -445,3 +445,35 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--a
 }
 .modal-actions { display: flex; gap: 8px; justify-content: flex-end; align-items: center; }
 .modal-actions .primary-btn { width: auto; max-width: none; }
+
+/* ------------------------------- workflow ------------------------------- */
+.wf-list { display: flex; flex-direction: column; gap: 10px; }
+.wf-card { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px; display: flex; flex-direction: column; gap: 7px; }
+.wf-head { display: flex; align-items: baseline; gap: 8px; }
+.wf-name { flex: 1; min-width: 0; font-size: 13px; font-weight: 600; overflow-wrap: anywhere; }
+.wf-meta { font-size: 10.5px; color: var(--fg-subtle); white-space: nowrap; }
+.wf-desc { margin: 0; font-size: 12px; color: var(--fg-muted); overflow-wrap: anywhere; }
+.wf-badges { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; font-size: 11px; color: var(--fg-muted); }
+.wf-sites { flex-basis: 100%; overflow-wrap: anywhere; }
+.wf-badge { padding: 1px 6px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 10.5px; }
+.wf-badge.is-warn { background: var(--warn-soft); color: var(--fg); }
+.wf-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.wf-actions .link-btn { margin-left: auto; }
+.wf-run { display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--border); padding-top: 8px; }
+.wf-log { display: flex; flex-direction: column; gap: 1px; font-size: 11px; max-height: 180px; overflow-y: auto; }
+.wf-log-row { display: flex; gap: 6px; }
+.wf-log-row.is-fail { color: var(--danger); }
+.wf-log-path { flex: none; min-width: 34px; font-family: var(--mono); color: var(--fg-subtle); }
+.wf-log-name { flex: 1; min-width: 0; font-family: var(--mono); overflow-wrap: anywhere; }
+.wf-log-ms { flex: none; max-width: 55%; text-align: right; color: var(--fg-subtle); overflow-wrap: anywhere; }
+.wf-log-row.is-fail .wf-log-ms { color: var(--danger); }
+.wf-label { font-size: 11px; font-weight: 600; color: var(--fg-muted); }
+.wf-pre { margin: 0; padding: 8px; max-height: 260px; overflow: auto; border-radius: var(--radius-sm); background: var(--bg-sunken); font: 10.5px/1.5 var(--mono); white-space: pre-wrap; overflow-wrap: anywhere; }
+.wf-status { white-space: pre-wrap; }
+.wf-actions .primary-btn { width: auto; padding: 7px 16px; font-size: 12.5px; border-radius: 8px; }
+.wf-help { margin: 0; font-size: 11px; color: var(--fg-muted); overflow-wrap: anywhere; }
+.wf-run .help { margin: 0; font-size: 11px; color: var(--fg-muted); }
+.wf-run > .primary-btn { align-self: flex-start; width: auto; padding: 7px 16px; }
+.wf-badge.is-ok { background: transparent; border: 1px solid var(--ok); color: var(--ok); }
+.approval-perms { margin: 0 0 6px; padding-left: 18px; font-size: 12px; color: var(--fg); }
+.approval-perms li { margin: 2px 0; overflow-wrap: anywhere; }
