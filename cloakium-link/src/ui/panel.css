@@ -125,7 +125,26 @@ main { flex: 1; min-height: 0; position: relative; }
 .msg-body p { margin: 0 0 8px; }
 .msg-body ul, .msg-body ol { margin: 0 0 8px; padding-left: 20px; }
 .msg-body li { margin: 2px 0; }
-.msg-body a { color: var(--accent); }
+.msg-body a { color: var(--accent); text-decoration: none; overflow-wrap: anywhere; }
+.msg-body a:hover { text-decoration: underline; }
+.msg-body del { color: var(--fg-muted); }
+.msg-body hr { border: 0; border-top: 1px solid var(--border); margin: 10px 0; }
+.msg-body blockquote { margin: 0 0 8px; padding: 2px 0 2px 10px; border-left: 3px solid var(--border-strong); color: var(--fg-muted); }
+
+/* bảng: cuộn ngang trong khung thay vì làm vỡ panel; ô không bị bẻ từng ký tự */
+.msg-body .table-wrap {
+  margin: 8px 0; overflow-x: auto; scrollbar-width: thin;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+}
+.msg-body table { border-collapse: collapse; width: 100%; font-size: 12.5px; line-height: 1.45; overflow-wrap: normal; }
+.msg-body th, .msg-body td {
+  padding: 6px 9px; text-align: left; vertical-align: top;
+  border-bottom: 1px solid var(--border); overflow-wrap: break-word;
+}
+.msg-body th { background: var(--bg-sunken); font-weight: 600; color: var(--fg); }
+.msg-body tbody tr:last-child td { border-bottom: 0; }
+.msg-body tbody tr:nth-child(even) td { background: color-mix(in srgb, var(--bg-sunken) 55%, transparent); }
+.msg-body td + td, .msg-body th + th { border-left: 1px solid var(--border); }
 
 .msg.user .msg-body {
   align-self: flex-end; max-width: 92%;
