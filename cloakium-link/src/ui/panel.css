@@ -256,6 +256,18 @@ details.card .card-label { font-size: 10.5px; text-transform: uppercase; letter-
   user-select: none; white-space: nowrap;
 }
 
+/* Ảnh dán vào ô soạn, chờ gửi */
+.composer-attachments { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 10px 0; }
+.composer-attachments[hidden] { display: none; }
+.attachment { position: relative; width: 52px; height: 52px; border-radius: 6px; overflow: hidden; border: 1px solid var(--border-strong); }
+.attachment img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.attachment-remove {
+  position: absolute; top: 2px; right: 2px; width: 18px; height: 18px; padding: 0; border: 0; border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65); color: #fff; font-size: 13px; line-height: 18px; cursor: pointer;
+}
+.msg-images { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+.msg-images img { max-width: 120px; max-height: 120px; border-radius: 6px; border: 1px solid var(--border-strong); display: block; }
+
 .composer-actions { display: flex; align-items: center; gap: 4px; padding: 4px 6px 6px; }
 .composer-actions .spacer { flex: 1; }
 
