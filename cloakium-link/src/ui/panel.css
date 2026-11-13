@@ -620,3 +620,88 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--a
 .wf-disclosure.is-open .wf-icon { transform: rotate(90deg); }
 .wf-disclosure:hover { color: var(--fg); }
 
+.approval-args { font-size: 11px; max-height: 140px; overflow: auto; margin: 0 0 8px; padding: 6px 8px; border-radius: 6px; background: var(--bg-subtle, rgba(127, 127, 127, 0.1)); white-space: pre-wrap; word-break: break-all; }
+
+/* ------------------------------ tab Từ xa: thẻ + bước ------------------------------ */
+.rv-card {
+  display: flex; flex-direction: column; gap: 10px; padding: 12px;
+  border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-raised);
+}
+.rv-card [hidden] { display: none !important; }
+.rv-card > h3 { margin: 0; font-size: 13px; font-weight: 600; color: var(--fg); }
+.rv-card > .help { margin: -4px 0 0; font-size: 11px; color: var(--fg-muted); }
+
+.rv-row { display: flex; align-items: center; gap: 9px; }
+.rv-row + .rv-row { padding-top: 10px; border-top: 1px solid var(--border); }
+.rv-row .remote-dot { width: 9px; height: 9px; }
+.rv-row-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.rv-row-text b { font-size: 12.5px; font-weight: 600; }
+.rv-row-state { font-size: 11.5px; color: var(--fg-muted); overflow: hidden; text-overflow: ellipsis; }
+.rv-card .switch input:disabled + .track { opacity: 0.45; cursor: not-allowed; }
+
+.rv-step { display: flex; gap: 10px; align-items: flex-start; }
+.rv-badge {
+  flex: none; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center;
+  font-size: 11px; font-weight: 600; background: var(--bg-sunken); border: 1px solid var(--border-strong); color: var(--fg-muted);
+}
+.rv-step.is-done .rv-badge { background: var(--ok); border-color: var(--ok); color: #fff; }
+.rv-step-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.rv-step-head b { font-size: 12.5px; font-weight: 600; line-height: 20px; }
+.rv-summary { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; font-size: 12px; color: var(--fg-muted); }
+.rv-summary-text { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.rv-summary .link-btn { padding: 2px 4px; }
+.rv-form { display: flex; flex-direction: column; gap: 8px; }
+.rv-form .help { margin: 0; font-size: 11px; color: var(--fg-muted); }
+.rv-form .primary-btn { max-width: none; }
+.rv-actions { display: flex; align-items: center; gap: 6px; }
+.rv-actions.is-fill > input { flex: 1; min-width: 0; }
+
+.rv-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.rv-chips:empty { display: none; }
+.rv-chip {
+  display: inline-flex; align-items: center; gap: 2px; padding: 2px 4px 2px 9px; border-radius: 999px;
+  background: var(--bg-sunken); border: 1px solid var(--border-strong); font: 12px var(--mono);
+}
+.rv-chip-x { border: 0; background: none; color: var(--fg-muted); font-size: 14px; line-height: 1; padding: 0 4px; border-radius: 50%; cursor: pointer; }
+.rv-chip-x:hover { color: var(--danger); background: var(--bg-hover); }
+.rv-card .status-line:empty { display: none; }
+.rv-row-note { margin: -4px 0 0 18px !important; }
+
+/* ------------------------------ tab Cài đặt: thẻ ------------------------------ */
+.set-card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.set-card-head h3 { margin: 0; font-size: 13px; font-weight: 600; color: var(--fg); }
+.set-pill { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+.set-pill.is-ok { color: var(--ok); background: color-mix(in srgb, var(--ok) 14%, transparent); }
+.set-pill.is-warn { color: var(--warn); background: var(--warn-soft); }
+.rv-card .field .help a { color: var(--accent); white-space: nowrap; }
+.set-icon-btn { flex: none; width: 34px; padding: 6px 0; font-size: 14px; line-height: 1; }
+.set-key-saved { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; padding: 6px 9px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-sunken); }
+.set-key-dots { font-family: var(--mono); letter-spacing: 1px; color: var(--fg-muted); }
+.set-key-text { flex: 1; min-width: 0; font-size: 12px; color: var(--ok); }
+.set-key-saved .link-btn { padding: 2px 4px; }
+.set-test { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding-top: 10px; border-top: 1px solid var(--border); }
+.set-local { display: flex; flex-direction: column; gap: 8px; }
+.set-local > .help { margin: 0; font-size: 11px; color: var(--fg-muted); }
+.set-inline { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.set-inline > label { flex: 1; font-size: 12.5px; font-weight: 500; }
+.set-inline > select { width: auto; min-width: 150px; }
+.set-inline > .status-line { flex: 1; }
+.set-switches { display: flex; flex-direction: column; }
+.set-switches > .switch-row { padding: 9px 0; }
+.set-switches > .switch-row:first-child { padding-top: 2px; }
+.set-switches > .switch-row:last-child { padding-bottom: 0; }
+.set-switches > .switch-row + .switch-row { border-top: 1px solid var(--border); }
+.set-advanced { gap: 0; }
+.set-advanced > summary, .set-sub > summary { cursor: pointer; font-size: 13px; font-weight: 600; list-style: none; display: flex; align-items: center; gap: 6px; }
+.set-advanced > summary::-webkit-details-marker, .set-sub > summary::-webkit-details-marker { display: none; }
+.set-advanced > summary::before, .set-sub > summary::before { content: "›"; display: inline-block; width: 10px; color: var(--fg-muted); transition: transform 0.15s; }
+.set-advanced[open] > summary::before, .set-sub[open] > summary::before { transform: rotate(90deg); }
+.set-advanced[open] > summary { margin-bottom: 10px; }
+.set-advanced > .field + .field, .set-advanced > .set-grid3 + .field { margin-top: 10px; }
+.set-grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.set-grid3 .field > label { font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.set-sub { display: flex; flex-direction: column; gap: 6px; }
+.set-sub > summary { font-size: 12px; font-weight: 500; color: var(--fg-muted); }
+.set-sub > .help { margin: 0; font-size: 11px; color: var(--fg-muted); }
+.set-sub > .secondary-btn { align-self: flex-start; }
+.set-footer { text-align: center; font-size: 11px; color: var(--fg-subtle); padding: 2px 0 4px; }
