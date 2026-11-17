@@ -113,9 +113,35 @@ main { flex: 1; min-height: 0; position: relative; }
 /* --------------------------------- thread -------------------------------- */
 .thread { flex: 1; overflow-y: auto; padding: 14px 12px 6px; display: flex; flex-direction: column; gap: 12px; scrollbar-width: thin; }
 
-.empty-state { margin: auto; text-align: center; padding: 20px 14px; color: var(--fg-muted); }
-.empty-state h2 { margin: 0 0 6px; font-size: 14.5px; color: var(--fg); font-weight: 600; }
+/* ------------------------------- thanh đầu Chat ------------------------------- */
+.chat-bar {
+  display: flex; align-items: center; gap: 4px;
+  padding: 5px 6px 5px 4px; border-bottom: 1px solid var(--border); background: var(--bg);
+}
+.chat-session {
+  flex: 1; min-width: 0; display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 8px; border: 0; border-radius: 7px; background: none; color: var(--fg-muted); text-align: left;
+}
+.chat-session:hover { background: var(--bg-hover); color: var(--fg); }
+.chat-session.is-active { background: var(--accent-soft); color: var(--accent); }
+.chat-session svg { flex: none; }
+.chat-session .chev { width: 13px; height: 13px; transition: transform 0.15s; }
+.chat-session.is-active .chev { transform: rotate(180deg); }
+.chat-session-title { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12.5px; font-weight: 500; color: var(--fg); }
+
+/* Màn chat trống: lời chào + vài việc làm ngay, căn trái cho dễ quét trong panel hẹp. */
+.empty-state { margin: auto 0; padding: 20px 6px; color: var(--fg-muted); display: flex; flex-direction: column; gap: 4px; }
+.empty-state h2 { margin: 0; font-size: 15px; color: var(--fg); font-weight: 600; letter-spacing: -0.01em; }
 .empty-state p { margin: 0; font-size: 12.5px; }
+.suggest-title { margin: 14px 0 2px; font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--fg-subtle); }
+.suggest-list { display: flex; flex-direction: column; gap: 6px; }
+.suggest-btn {
+  display: flex; align-items: center; gap: 8px; width: 100%; padding: 8px 11px; text-align: left;
+  border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg-raised); color: var(--fg); font-size: 12.5px;
+}
+.suggest-btn::after { content: "›"; margin-left: auto; color: var(--fg-subtle); font-size: 15px; line-height: 1; }
+.suggest-btn:hover { border-color: var(--border-strong); background: var(--bg-hover); }
+.suggest-btn:hover::after { color: var(--accent); }
 
 .msg { display: flex; flex-direction: column; gap: 5px; }
 .msg-role { font-size: 11px; font-weight: 600; color: var(--fg-subtle); letter-spacing: 0.02em; }
@@ -269,7 +295,6 @@ details.card .card-label { font-size: 10.5px; text-transform: uppercase; letter-
 .msg-images img { max-width: 120px; max-height: 120px; border-radius: 6px; border: 1px solid var(--border-strong); display: block; }
 
 .composer-actions { display: flex; align-items: center; gap: 4px; padding: 4px 6px 6px; }
-.composer-actions .spacer { flex: 1; }
 
 .icon-btn {
   display: inline-flex; align-items: center; justify-content: center;
@@ -286,7 +311,11 @@ details.card .card-label { font-size: 10.5px; text-transform: uppercase; letter-
 .send-btn:disabled { opacity: 0.35; cursor: default; }
 .send-btn.is-stop { background: var(--danger); color: #fff; }
 
-.composer-hint { margin: 6px 2px 0; font-size: 10.5px; color: var(--fg-subtle); }
+/* Gợi ý phím nằm chung hàng nút (không chiếm thêm một dòng); panel hẹp thì cắt bớt. */
+.composer-hint {
+  flex: 1; min-width: 0; margin: 0 4px; font-size: 10.5px; color: var(--fg-subtle);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
 
 /* ------------------------------ popover / menu ------------------------------ */
 .popover {
@@ -511,7 +540,7 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--a
 .approval-perms li { margin: 2px 0; overflow-wrap: anywhere; }
 
 /* ------------------------- tab Workflow: danh sách + chi tiết ------------------------- */
-#workflowsRoot { position: relative; gap: 10px; padding-top: 0; }
+#workflowsRoot { position: relative; gap: 12px; padding-top: 0; }
 #workflowsRoot .wf-icon { flex: none; }
 .wf-toolbar {
   position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 6px;
@@ -705,3 +734,74 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--a
 .set-sub > .help { margin: 0; font-size: 11px; color: var(--fg-muted); }
 .set-sub > .secondary-btn { align-self: flex-start; }
 .set-footer { text-align: center; font-size: 11px; color: var(--fg-subtle); padding: 2px 0 4px; }
+
+/* ------------------------ tab Workflow: nhóm Của bạn / Marketplace ------------------------ */
+.wf-group { display: flex; flex-direction: column; gap: 8px; }
+.wf-group + .wf-group, .wf-banner + .wf-group { padding-top: 12px; border-top: 1px solid var(--border); }
+.wf-list-head { display: flex; align-items: center; gap: 6px; min-height: 22px; }
+.wf-list-head .section-label { margin: 0; }
+.wf-list-head .spacer { flex: 1; }
+.wf-group > .wf-help { margin-top: -4px; }
+.wf-group-toggle {
+  display: inline-flex; align-items: center; gap: 4px; margin-left: -2px; padding: 2px 4px 2px 0;
+  border: 0; border-radius: 5px; background: none; color: var(--fg-subtle);
+}
+.wf-group-toggle .wf-icon { width: 12px; height: 12px; transition: transform 0.15s; }
+.wf-group-toggle.is-open .wf-icon { transform: rotate(90deg); }
+.wf-group-toggle .section-label { margin: 0; }
+.wf-group-toggle:hover, .wf-group-toggle:hover .section-label { color: var(--fg); }
+.wf-more-link { display: inline-flex; align-items: center; gap: 4px; padding: 2px 0; font-size: 12px; }
+.wf-more-link .wf-icon { order: 2; width: 12px; height: 12px; }
+.wf-more-link:hover { text-decoration: underline; }
+
+.wf-market-item { align-items: center; color: inherit; text-decoration: none; }
+.wf-market-tile {
+  flex: none; width: 28px; height: 28px; border-radius: 7px; display: grid; place-items: center;
+  background: var(--accent-soft); color: var(--accent); font-weight: 650; font-size: 12.5px;
+}
+.wf-verified { display: inline-flex; flex: none; color: var(--ok); }
+.wf-verified .wf-icon { width: 12px; height: 12px; }
+.wf-rating { display: inline-flex; align-items: center; gap: 3px; color: var(--warn); font-variant-numeric: tabular-nums; }
+.wf-rating .wf-icon { width: 11px; height: 11px; }
+.wf-market-go { flex: none; display: inline-flex; color: var(--fg-subtle); }
+.wf-market-go .wf-icon { width: 13px; height: 13px; }
+.wf-market-item:hover .wf-market-go { color: var(--accent); }
+
+.wf-skel {
+  height: 58px; border-radius: var(--radius-sm); border: 1px solid var(--border);
+  background: linear-gradient(90deg, var(--bg-sunken) 0%, var(--bg-hover) 50%, var(--bg-sunken) 100%);
+  background-size: 200% 100%; animation: shimmer 1.3s linear infinite;
+}
+@keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) { .wf-skel { animation: none; } }
+
+/* Marketplace thu gọn: chỉ còn một dòng, dạt xuống đáy panel (margin-top:auto khi danh sách ngắn,
+   sticky khi danh sách dài) để không chen giữa workflow của user. Mở ra thì về chỗ cũ dưới danh sách. */
+#workflowsRoot > .wf-market.is-collapsed {
+  position: sticky; bottom: 0; z-index: 4;
+  margin: auto -12px 0; padding: 9px 12px 11px;
+  background: var(--bg); border-top: 1px solid var(--border);
+}
+#workflowsRoot:has(> .wf-market.is-collapsed) { padding-bottom: 0; }
+
+/* Nút Thêm ở mục marketplace (đã đăng nhập): nhẹ hơn nút Chạy, để không lấn workflow của user. */
+.wf-add-btn {
+  flex: none; display: inline-flex; align-items: center; gap: 4px; padding: 4px 9px;
+  border: 1px solid var(--accent); border-radius: 7px; background: var(--bg-raised);
+  color: var(--accent); font-size: 11.5px; font-weight: 600; white-space: nowrap;
+}
+.wf-add-btn:hover:not(:disabled) { background: var(--accent-soft); }
+.wf-add-btn:disabled { opacity: 0.55; cursor: default; }
+.wf-add-btn .wf-icon { width: 11px; height: 11px; }
+.wf-add-btn .spinner { width: 10px; height: 10px; }
+.wf-market-item > .wf-tag { flex: none; }
+.wf-added { display: inline-flex; align-items: center; gap: 3px; }
+.wf-added .wf-icon { width: 10px; height: 10px; }
+
+/* Marketplace mở: "Của bạn" cao tối đa ~nửa panel, cuộn bên trong (khoảng 3-4 thẻ), Marketplace
+   luôn lộ ra bên dưới. Bóng mờ ở mép dưới báo còn thẻ phía dưới. */
+.wf-mine-list.is-capped {
+  max-height: max(220px, 45vh); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin;
+  padding: 1px 2px 1px 1px; margin: -1px -2px -1px -1px;
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 18px), transparent);
+}
