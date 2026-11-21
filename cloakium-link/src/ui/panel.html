@@ -31,6 +31,7 @@
       <button role="tab" id="tab-remote" aria-controls="view-remote" data-view="remote" data-i18n="nav.remote">Remote</button>
       <button role="tab" id="tab-network" aria-controls="view-network" data-view="network" hidden><span data-i18n="nav.network">Network</span><span class="tab-count" id="netCount" hidden></span></button>
       <button role="tab" id="tab-log" aria-controls="view-log" data-view="log" hidden><span data-i18n="nav.log">Log</span><span class="tab-count" id="logCount" hidden></span></button>
+      <button role="tab" id="tab-overrides" aria-controls="view-overrides" data-view="overrides" hidden><span data-i18n="nav.overrides">Overrides</span><span class="tab-dot" id="ovDot" hidden></span></button>
       <button role="tab" id="tab-settings" aria-controls="view-settings" data-view="settings" data-i18n="nav.settings">Settings</button>
     </nav>
 
@@ -113,24 +114,19 @@
       </section>
 
       <!-- ---------------------------- SETTINGS ---------------------------- -->
+      <!-- ----------------------------- NETWORK ----------------------------- -->
       <section class="view" id="view-network" role="tabpanel" aria-labelledby="tab-network" hidden>
-        <div class="capture-bar">
-          <input type="search" id="netFilter" data-i18n-placeholder="capture.filter" placeholder="Filter…" />
-          <label class="capture-check"><input type="checkbox" id="netErrorsOnly" /><span data-i18n="capture.errorsOnly">Errors only</span></label>
-          <span class="capture-tally" id="netTally"></span>
-          <button type="button" class="secondary-btn" id="netClear" data-i18n="capture.clear">Clear</button>
-        </div>
-        <div class="capture-list" id="netList"></div>
+        <div class="net-root" id="netRoot"></div>
       </section>
 
+      <!-- ------------------------------- LOG ------------------------------- -->
       <section class="view" id="view-log" role="tabpanel" aria-labelledby="tab-log" hidden>
-        <div class="capture-bar">
-          <input type="search" id="logFilter" data-i18n-placeholder="capture.filter" placeholder="Filter…" />
-          <label class="capture-check"><input type="checkbox" id="logErrorsOnly" /><span data-i18n="capture.errorsOnly">Errors only</span></label>
-          <span class="capture-tally" id="logTally"></span>
-          <button type="button" class="secondary-btn" id="logClear" data-i18n="capture.clear">Clear</button>
-        </div>
-        <div class="capture-list" id="logList"></div>
+        <div class="net-root" id="logRoot"></div>
+      </section>
+
+      <!-- ---------------------------- OVERRIDES ---------------------------- -->
+      <section class="view" id="view-overrides" role="tabpanel" aria-labelledby="tab-overrides" hidden>
+        <div class="settings" id="overridesRoot"></div>
       </section>
 
       <section class="view" id="view-settings" role="tabpanel" aria-labelledby="tab-settings" hidden>
